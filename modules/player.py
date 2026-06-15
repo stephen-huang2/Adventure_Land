@@ -120,5 +120,8 @@ class Player:
         return True
 
     def level_up(self):
-        """Increment the player's level, unlocking the next island on the main map."""
+        """
+        Increment the player's level, unlocking the next island on the
+        main map.
+        """
         self.level += 1
