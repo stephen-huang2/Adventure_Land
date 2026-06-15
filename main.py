@@ -64,7 +64,8 @@ while True:
     else:
         # Unrecognised input — prompt again
         clear()
-        type_write("Invalid choice. Please enter 'tutorial', 'runs', or 'play'.\n")
+        type_write("Invalid choice. Please enter 'tutorial', 'runs', or "
+                   "'play'.\n")
 
 # Hand off to the main game loop (defined in modules/map.py)
 main()
