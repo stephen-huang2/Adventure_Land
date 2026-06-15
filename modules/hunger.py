@@ -9,7 +9,7 @@ class Hunger:
 
     def deplete(self, amount=1):
         """Reduce hunger by amount, returns True if still alive,
-           False if starved."""
+        False if starved."""
         self.current_points -= amount
 
         # Clamp to zero to prevent negative hunger points
@@ -28,8 +28,9 @@ class Hunger:
         }
 
         # Extract food name without item number (e.g. "1. Pork" -> "Pork")
-        food_type = food_name.split(". ")[-1] if ". " in food_name \
-            else food_name
+        food_type = (
+            food_name.split(". ")[-1] if ". " in food_name else food_name
+        )
 
         if food_type in food_values:
             restore_amount = food_values[food_type]
@@ -47,8 +48,10 @@ class Hunger:
     def get_status(self):
         """Return current hunger status."""
         percentage = (self.current_points / self.max_points) * 100
-        return (f"Hunger: {self.current_points}/"
-                + f"{self.max_points} ({percentage:.0f}%)")
+        return (
+            f"Hunger: {self.current_points}/"
+            + f"{self.max_points} ({percentage:.0f}%)"
+        )
 
     def is_starving(self):
         """Check if hunger is fully depleted."""

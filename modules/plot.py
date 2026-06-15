@@ -1,3 +1,12 @@
+######################################################################
+# Title: Jeffer Einstein's Archipelago
+# Assignment: Video Game
+# Name: Stephen Huang & Syed Hussain
+# Class: CS30
+# Current Date: 6/15/2026
+#######################################################################
+'''This code sets the foundation for creating maps in the game.'''
+#######################################################################
 import tabulate
 from modules.type_write import *
 
@@ -6,8 +15,10 @@ class Plot:
     """Represents a 2D grid map that can be displayed as a table."""
 
     def __init__(self, name: str, plot: str, start_pos: list):
-        self.name = name          # Display name of the map
-        self.start_pos = start_pos  # List of valid start positions as "row,col" strings
+        self.name = name  # Display name of the map
+        self.start_pos = (
+            start_pos  # List of valid start positions as "row,col" strings
+        )
         # Build a 2D grid from the "colsxrows" format string (e.g. "3x2")
         self.plot = [
             ["" for _ in range(int(plot.split("x")[0]))]
@@ -26,7 +37,9 @@ class Plot:
 class Island(Plot):
     """A named region of the world with its own grid map and description."""
 
-    def __init__(self, name: str, plot: str, start_pos: list, description: str):
+    def __init__(
+        self, name: str, plot: str, start_pos: list, description: str
+    ):
         super().__init__(name, plot, start_pos)
         # Flavour text shown when the player enters the island
         self.description = description

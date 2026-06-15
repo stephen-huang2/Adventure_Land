@@ -1,3 +1,12 @@
+######################################################################
+# Title: Jeffer Einstein's Archipelago
+# Assignment: Video Game
+# Name: Stephen Huang & Syed Hussain
+# Class: CS30
+# Current Date: 6/15/2026
+#######################################################################
+'''This code manages the Player class.'''
+#######################################################################
 from modules.clear import clear
 from modules.plot import *
 from modules.type_write import *
@@ -16,13 +25,18 @@ class Player:
         jacket: Inventory,
         level: int = 0,
     ):
-        self.name = name                    # Player's display name
-        self.pos = pos                      # Current [row, col] position on the map
-        self.map_choice = map_choice        # The map/island the player is currently on
-        self.jacket = jacket                # Player's inventory (their jacket)
-        self.level = level                  # Current level, used to unlock new islands
-        self.hunger = Hunger()              # Hunger tracker instance
-        self.failed_riddle_attempts = 0     # Counter for consecutive failed riddles
+        self.name = name  # Player's display name
+        # Current [row, col] position on the map
+        self.pos = pos
+        self.map_choice = (
+            map_choice  # The map/island the player is currently on
+        )
+        self.jacket = jacket  # Player's inventory (their jacket)
+        self.level = level  # Current level, used to unlock new islands
+        self.hunger = Hunger()  # Hunger tracker instance
+        self.failed_riddle_attempts = (
+            0  # Counter for consecutive failed riddles
+        )
 
     def __str__(self):
         return self.name
@@ -69,7 +83,10 @@ class Player:
                     return False
                 continue
 
-            elif move_choice == "down" and self.pos[0] < len(self.map_choice.plot) - 1:
+            elif (
+                move_choice == "down"
+                and self.pos[0] < len(self.map_choice.plot) - 1
+            ):
                 self.pos[0] += 1
                 if not self.hunger.deplete(1):
                     return False
@@ -81,7 +98,10 @@ class Player:
                     return False
                 continue
 
-            elif move_choice == "right" and self.pos[1] < len(self.map_choice.plot[0]) - 1:
+            elif (
+                move_choice == "right"
+                and self.pos[1] < len(self.map_choice.plot[0]) - 1
+            ):
                 self.pos[1] += 1
                 if not self.hunger.deplete(1):
                     return False

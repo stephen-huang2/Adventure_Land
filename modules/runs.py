@@ -1,7 +1,17 @@
+######################################################################
+# Title: Jeffer Einstein's Archipelago
+# Assignment: Video Game
+# Name: Stephen Huang & Syed Hussain
+# Class: CS30
+# Current Date: 6/15/2026
+#######################################################################
+'''
+This code is responsible for saving each session the player makes.
+'''
+#######################################################################
 import csv
 import os
 from datetime import datetime
-
 
 RUNS_FILE = "runs.csv"  # Path to the CSV file used to log all completed runs
 
@@ -11,13 +21,15 @@ def initialize_runs_file():
     if not os.path.exists(RUNS_FILE):
         with open(RUNS_FILE, "w", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow([
-                "Date",
-                "Player Name",
-                "Playtime (Minutes)",
-                "Playtime (Seconds)",
-                "Result",
-            ])
+            writer.writerow(
+                [
+                    "Date",
+                    "Player Name",
+                    "Playtime (Minutes)",
+                    "Playtime (Seconds)",
+                    "Result",
+                ]
+            )
 
 
 def log_run(player_name, start_time, end_condition):
@@ -28,7 +40,7 @@ def log_run(player_name, start_time, end_condition):
         player_name:   Name of the player or a player object with a .name attribute.
         start_time:    Datetime object representing when the run started.
         end_condition: How the run ended
-                       (e.g. "Game Completed", "Starved to Death", "Riddle Failure", "Quit").
+                       (e.g. "Game Completed", "Starved to Death", "Riddle Failure", "Quit"). # noqa
     """
     initialize_runs_file()
 
@@ -40,15 +52,19 @@ def log_run(player_name, start_time, end_condition):
     seconds = total_seconds % 60
 
     # Accept either a player object or a plain string for the name
-    player_name_str = player_name.name if hasattr(player_name, "name") else player_name
+    player_name_str = (
+        player_name.name if hasattr(player_name, "name") else player_name
+    )
 
     # Append the run as a new row in the CSV
     with open(RUNS_FILE, "a", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow([
-            end_time.strftime("%Y-%m-%d %H:%M:%S"),
-            player_name_str,
-            minutes,
-            seconds,
-            end_condition,
-        ])
+        writer.writerow(
+            [
+                end_time.strftime("%Y-%m-%d %H:%M:%S"),
+                player_name_str,
+                minutes,
+                seconds,
+                end_condition,
+            ]
+        )

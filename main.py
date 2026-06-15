@@ -1,3 +1,12 @@
+######################################################################
+# Title: Jeffer Einstein's Archipelago
+# Assignment: Video Game
+# Name: Stephen Huang & Syed Hussain
+# Class: CS30
+# Current Date: 6/15/2026
+#######################################################################
+'''This code manages the whole game'''
+#######################################################################
 # Imports & Global Variables
 from modules.clear import clear
 from modules.map import *
@@ -6,7 +15,6 @@ from modules.runs import log_run, RUNS_FILE
 from datetime import datetime
 import csv
 import os
-
 
 # ---------------------------------------------------------------------------
 # Entry Point — Build the story and show the main menu
@@ -64,8 +72,9 @@ while True:
     else:
         # Unrecognised input — prompt again
         clear()
-        type_write("Invalid choice. Please enter 'tutorial', 'runs', or "
-                   "'play'.\n")
+        type_write(
+            "Invalid choice. Please enter 'tutorial', 'runs', or " "'play'.\n"
+        )
 
 # Hand off to the main game loop (defined in modules/map.py)
 main()

@@ -1,9 +1,25 @@
+######################################################################
+# Title: Jeffer Einstein's Archipelago
+# Assignment: Video Game
+# Name: Stephen Huang & Syed Hussain
+# Class: CS30
+# Current Date: 6/15/2026
+#######################################################################
+'''This code is responsible for different interactable room types.'''
+#######################################################################
+
 class Room:
     """Represents a room in the game world."""
 
-    def __init__(self, name: str, key: bool = False, unlocked: bool = False, key_type: str = "Key"):
-        self.name = name          # Display name of the room
-        self.key = key            # Whether the room requires a key
+    def __init__(
+        self,
+        name: str,
+        key: bool = False,
+        unlocked: bool = False,
+        key_type: str = "Key",
+    ):
+        self.name = name  # Display name of the room
+        self.key = key  # Whether the room requires a key
         self.unlocked = unlocked  # Whether the room is currently unlocked
         self.key_type = key_type  # The type of key required to unlock the room
 
@@ -74,7 +90,8 @@ class Kraken(Room):
     CORRECT = "3"  # Correct answer index: "The Kraken"
 
     def __init__(self):
-        # The Kraken's room starts unlocked — the challenge is the riddle itself
+        # The Kraken's room starts unlocked — the challenge is the riddle
+        # itself
         super().__init__("The Kraken", key=False, unlocked=True)
         self.riddle_solved = False  # Tracks whether the riddle has been solved
 
@@ -124,9 +141,16 @@ class DemonsPalace(Room):
         "Tell me, mortal: What am I?"
     )
     ANSWERS = [
-        "1. Greed", "2. A Lie", "3. Guilt", "4. Sin",
-        "5. Ambition", "6. Time", "7. Betrayal",
-        "8. The Truth", "9. A Shadow", "10. Memory",
+        "1. Greed",
+        "2. A Lie",
+        "3. Guilt",
+        "4. Sin",
+        "5. Ambition",
+        "6. Time",
+        "7. Betrayal",
+        "8. The Truth",
+        "9. A Shadow",
+        "10. Memory",
     ]
     CORRECT = "4"  # Correct answer index: "Sin"
 
@@ -166,7 +190,7 @@ class DemonsPalace(Room):
             return True
         else:
             type_write_fn(
-                '\nThe demons sneer at you. Your answer echoes off the black spires and means nothing.\n'
+                "\nThe demons sneer at you. Your answer echoes off the black spires and means nothing.\n"
                 '"Pathetic. Come back when you have truly looked at yourself. Try again next time."\n'
             )
             return False

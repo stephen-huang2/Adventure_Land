@@ -1,9 +1,20 @@
+######################################################################
+# Title: Jeffer Einstein's Archipelago
+# Assignment: Video Game
+# Name: Stephen Huang & Syed Hussain
+# Class: CS30
+# Current Date: 6/15/2026
+#######################################################################
+'''
+This code provides an alternate solution to text prompting the player.
+'''
+#######################################################################
+
 import sys
 import time
 
-
 BOLD_START = "\033[1m"  # Code to begin bold text
-BOLD_END = "\033[0m"    # Code to reset text formatting
+BOLD_END = "\033[0m"  # Code to reset text formatting
 
 
 def type_write(

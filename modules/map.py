@@ -1,3 +1,12 @@
+######################################################################
+# Title: Jeffer Einstein's Archipelago
+# Assignment: Video Game
+# Name: Stephen Huang & Syed Hussain
+# Class: CS30
+# Current Date: 6/15/2026
+#######################################################################
+'''This code manages the maps in the game.'''
+#######################################################################
 # Imports & Global Variables
 from modules.clear import clear
 from modules.plot import *
@@ -9,7 +18,6 @@ from modules.hunger import Hunger
 from modules.runs import log_run
 from datetime import datetime
 
-
 # ---------------------------------------------------------------------------
 # Island & Map Definitions
 # ---------------------------------------------------------------------------
@@ -17,30 +25,46 @@ from datetime import datetime
 # Defining each island in the main map
 base = Island("Main Island (Lab)", "1x1", ["0,0"], "The lab you escaped from.")
 forests = Island(
-    "Enchanted Woodlands", "1x3", ["2,0"],
+    "Enchanted Woodlands",
+    "1x3",
+    ["2,0"],
     "Largely uncharted. Explore at your own risk.",
 )
 caves = Island(
-    "Jagged Caverns", "3x3", ["2,0", "0,2", "1,0"],
+    "Jagged Caverns",
+    "3x3",
+    ["2,0", "0,2", "1,0"],
     "Litterred with corpses of miners.",
 )
 farms = Island(
-    "Crop Meadows", "2x3", ["2,0"],
+    "Crop Meadows",
+    "2x3",
+    ["2,0"],
     "Scattered with nourishment, from vegetables & grain to all kind's of fruit and some pigs.",
 )
 fire_world = Island(
-    "Hellscape", "5x1", ["0,4"],
+    "Hellscape",
+    "5x1",
+    ["0,4"],
     "None that have ventured are known to return.",
 )
 water_world = Island(
-    "Aquatic Abyss", "2x1", ["0,0"],
+    "Aquatic Abyss",
+    "2x1",
+    ["0,0"],
     "Try to not get swallowed by the depths of the Abyss.",
 )
 
 # Unused islands — reserved for future content
-prison = Island("Darkwood Prison", "1x1", ["0,0"], "A prison filled with opportunities.")
-dock = Island("Einstein Dock's", "1x1", ["0,0"], "The dock that leads to freedom.")
-spiders = Island("Arachnid Web", "2x2", ["0,0"], "Tangled in treacherous spider silk.")
+prison = Island(
+    "Darkwood Prison", "1x1", ["0,0"], "A prison filled with opportunities."
+)
+dock = Island(
+    "Einstein Dock's", "1x1", ["0,0"], "The dock that leads to freedom."
+)
+spiders = Island(
+    "Arachnid Web", "2x2", ["0,0"], "Tangled in treacherous spider silk."
+)
 
 
 # ---------------------------------------------------------------------------
@@ -51,19 +75,19 @@ spiders = Island("Arachnid Web", "2x2", ["0,0"], "Tangled in treacherous spider 
 main_map = Plot("MAIN MAP", "3x2", ["1,1"])
 
 # Assigning map coordinates to islands (unlocked as the player levels up)
-main_map.plot[0][0] = "LOCKED"                     # forests
+main_map.plot[0][0] = "LOCKED"  # forests
 main_map.plot[0][1] = Room("LOCKED (go here)", True)
-main_map.plot[0][2] = "LOCKED"                     # farms
-main_map.plot[1][0] = "LOCKED"                     # fire_world
+main_map.plot[0][2] = "LOCKED"  # farms
+main_map.plot[1][0] = "LOCKED"  # fire_world
 main_map.plot[1][1] = base
-main_map.plot[1][2] = "LOCKED"                     # water_world
+main_map.plot[1][2] = "LOCKED"  # water_world
 
 # Planned future map slots (currently unused)
-'''
+"""
 main_map.plot[2][0] = "LOCKED"  # prison
 main_map.plot[2][1] = "LOCKED"  # dock
 main_map.plot[2][2] = "LOCKED"  # spiders
-'''
+"""
 
 
 # ---------------------------------------------------------------------------
@@ -165,6 +189,7 @@ steve = Player(
 # Game Functions
 # ---------------------------------------------------------------------------
 
+
 def reset_game(player_name: Player):
     """Reset all game state to initial conditions for a new run."""
 
@@ -234,8 +259,14 @@ def explore_island(player_name: Player):
         return
 
     # Enter the island and display its description
-    player_name.map_choice = main_map.plot[player_name.pos[0]][player_name.pos[1]]
-    type_write(f"INFO ({player_name.map_choice}):\n" + player_name.map_choice.description + "\n")
+    player_name.map_choice = main_map.plot[player_name.pos[0]][
+        player_name.pos[1]
+    ]
+    type_write(
+        f"INFO ({player_name.map_choice}):\n"
+        + player_name.map_choice.description
+        + "\n"
+    )
     player_name.pos = [
         int(player_name.map_choice.start_pos[0].split(",")[0]),
         int(player_name.map_choice.start_pos[0].split(",")[1]),
@@ -247,7 +278,9 @@ def explore_island(player_name: Player):
     def refresh_location_state():
         """Refresh the display and action choices based on the current tile."""
         nonlocal choices
-        current = player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]
+        current = player_name.map_choice.plot[player_name.pos[0]][
+            player_name.pos[1]
+        ]
         type_write(player_name.hunger.get_status())
 
         if type(current) is Inventory:
@@ -272,7 +305,9 @@ def explore_island(player_name: Player):
                 f"{BOLD_START}search{BOLD_END}/{BOLD_START}eat{BOLD_END}/{BOLD_START}exit island{BOLD_END})"
             )
         elif type(current) is DemonsPalace:
-            type_write("The Demon's Palace stands before you, its gates scorched black.")
+            type_write(
+                "The Demon's Palace stands before you, its gates scorched black."
+            )
             choices = (
                 f"({BOLD_START}move{BOLD_END}/{BOLD_START}view map{BOLD_END}/"
                 f"{BOLD_START}inspect jacket{BOLD_END}/{BOLD_START}interact{BOLD_END}/"
@@ -281,7 +316,8 @@ def explore_island(player_name: Player):
         elif type(current) is Room:
             key_room = current
             if key_room.key:
-                type_write(f"You are at a locked room. You need a {key_room.key_type} to proceed.")
+                type_write(f"You are at a locked room. You need a {
+                        key_room.key_type} to proceed.")
                 choices = (
                     f"({BOLD_START}move{BOLD_END}/{BOLD_START}view map{BOLD_END}/"
                     f"{BOLD_START}inspect jacket{BOLD_END}/{BOLD_START}use {key_room.key_type}{BOLD_END}/"
@@ -323,7 +359,9 @@ def explore_island(player_name: Player):
             alive = player_name.move()
             if not alive:
                 # Player starved — prompt to quit or restart
-                type_write("You collapse from starvation... Einstein finds you.\n")
+                type_write(
+                    "You collapse from starvation... Einstein finds you.\n"
+                )
                 type_write("GAME OVER: You starved to death!\n")
                 while True:
                     game_choice = type_write(
@@ -345,13 +383,17 @@ def explore_island(player_name: Player):
             player_name.jacket.view_inventory()
 
         elif menu_choice.startswith("use"):
-            current = player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]
+            current = player_name.map_choice.plot[player_name.pos[0]][
+                player_name.pos[1]
+            ]
             if type(current) is Room and current.key:
                 # Search inventory for the required key item
                 key_found = False
                 for item in player_name.jacket.inventory:
                     if current.key_type in item[0]:
-                        type_write("You've unlocked the room! You have gained access to a bigger map!\n")
+                        type_write(
+                            "You've unlocked the room! You have gained access to a bigger map!\n"
+                        )
                         current.unlocked = True
                         current.key = False
                         item[0] = item[0].split(". ")[0] + ". EMPTY"
@@ -364,38 +406,56 @@ def explore_island(player_name: Player):
                 type_write("There is no locked room here.\n")
 
         elif menu_choice.startswith("interact"):
-            current = player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]
+            current = player_name.map_choice.plot[player_name.pos[0]][
+                player_name.pos[1]
+            ]
 
             if type(current) is Dryad:
                 if not current.riddle_solved:
-                    # Dryad requires a Magical Branch as tribute before attempting the riddle
-                    has_branch = any("Magical Branch" in item[0] for item in player_name.jacket.inventory)
+                    # Dryad requires a Magical Branch as tribute before
+                    # attempting the riddle
+                    has_branch = any(
+                        "Magical Branch" in item[0]
+                        for item in player_name.jacket.inventory
+                    )
                     if has_branch:
-                        type_write("You offer the Magical Branch. The Dryad accepts it and regards you with ancient eyes.\n")
-                        if current.attempt_riddle(type_write, BOLD_START, BOLD_END):
+                        type_write(
+                            "You offer the Magical Branch. The Dryad accepts it and regards you with ancient eyes.\n"
+                        )
+                        if current.attempt_riddle(
+                            type_write, BOLD_START, BOLD_END
+                        ):
                             # Consume the branch on success
                             for item in player_name.jacket.inventory:
                                 if "Magical Branch" in item[0]:
-                                    item[0] = item[0].split(". ")[0] + ". EMPTY"
+                                    item[0] = (
+                                        item[0].split(". ")[0] + ". EMPTY"
+                                    )
                                     break
                             player_name.level_up()
                             player_name.reset_failed_riddle_attempts()
                         else:
-                            type_write("The Dryad rejects your magical branch.\n")
+                            type_write(
+                                "The Dryad rejects your magical branch.\n"
+                            )
                             result = handle_riddle_failure()
                             if result:
                                 return result
                     else:
                         type_write(
                             "The Dryad stares at you coldly.\n"
-                            "\"Bring me a Magical Branch as tribute before I will speak with you.\"\n"
+                            '"Bring me a Magical Branch as tribute before I will speak with you."\n'
                         )
                 else:
-                    type_write("The Dryad nods at you slowly. You have already proven yourself.\n")
+                    type_write(
+                        "The Dryad nods at you slowly. You have already proven yourself.\n"
+                    )
 
             elif type(current) is Kraken:
                 if not current.riddle_solved:
-                    if current.attempt_riddle(type_write, BOLD_START, BOLD_END):
+                    if current.attempt_riddle(
+                        type_write, BOLD_START, BOLD_END
+                    ):
                         player_name.level_up()
                         player_name.reset_failed_riddle_attempts()
                     else:
@@ -403,19 +463,30 @@ def explore_island(player_name: Player):
                         if result:
                             return result
                 else:
-                    type_write("The Kraken's eye slides toward you. It has already deemed you worthy.\n")
+                    type_write(
+                        "The Kraken's eye slides toward you. It has already deemed you worthy.\n"
+                    )
 
             elif type(current) is DemonsPalace:
                 if not current.riddle_solved:
                     # Demon's Palace requires the Eye of Hell as an offering
-                    has_eye = any("Eye of Hell" in item[0] for item in player_name.jacket.inventory)
+                    has_eye = any(
+                        "Eye of Hell" in item[0]
+                        for item in player_name.jacket.inventory
+                    )
                     if has_eye:
-                        type_write("You hold out the Eye of Hell. The palace gates shudder and groan open...\n")
-                        if current.attempt_riddle(type_write, BOLD_START, BOLD_END):
+                        type_write(
+                            "You hold out the Eye of Hell. The palace gates shudder and groan open...\n"
+                        )
+                        if current.attempt_riddle(
+                            type_write, BOLD_START, BOLD_END
+                        ):
                             # Consume the Eye of Hell on success
                             for item in player_name.jacket.inventory:
                                 if "Eye of Hell" in item[0]:
-                                    item[0] = item[0].split(". ")[0] + ". EMPTY"
+                                    item[0] = (
+                                        item[0].split(". ")[0] + ". EMPTY"
+                                    )
                                     break
                             player_name.reset_failed_riddle_attempts()
                             type_write(
@@ -424,23 +495,29 @@ def explore_island(player_name: Player):
                             )
                             return "game_completed"
                         else:
-                            type_write("The demons reject your offering. The Eye of Hell remains with you.\n")
+                            type_write(
+                                "The demons reject your offering. The Eye of Hell remains with you.\n"
+                            )
                             result = handle_riddle_failure()
                             if result:
                                 return result
                     else:
                         type_write(
                             "The palace gates do not move. Something is missing...\n"
-                            "\"Bring us the Eye of Hell.\"\n"
+                            '"Bring us the Eye of Hell."\n'
                         )
                 else:
-                    type_write("The demons watch you in silence. You have already passed their test.\n")
+                    type_write(
+                        "The demons watch you in silence. You have already passed their test.\n"
+                    )
 
             else:
                 type_write("There is nothing to interact with here.\n")
 
         elif menu_choice.startswith("search"):
-            current = player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]
+            current = player_name.map_choice.plot[player_name.pos[0]][
+                player_name.pos[1]
+            ]
             if type(current) is Inventory:
                 loot_stash = current
                 loot_stash.view_inventory()
@@ -450,23 +527,36 @@ def explore_island(player_name: Player):
                     userin=True,
                 )
                 loot_stolen = False
-                if item_choice in [str(i + 1) for i in range(len(loot_stash.inventory))]:
+                if item_choice in [
+                    str(i + 1) for i in range(len(loot_stash.inventory))
+                ]:
                     for i in range(len(player_name.jacket.inventory)):
                         if player_name.jacket.inventory[i][0][-5:] == "EMPTY":
-                            item_label = loot_stash.inventory[int(item_choice) - 1][0].split(". ")[1]
-                            if item_label != "EMPTY" and item_label != "Pocket":
+                            item_label = loot_stash.inventory[
+                                int(item_choice) - 1
+                            ][0].split(". ")[1]
+                            if (
+                                item_label != "EMPTY"
+                                and item_label != "Pocket"
+                            ):
                                 # Pick up a regular item into an empty slot
-                                player_name.jacket.inventory[i][0] = f"{i + 1}. {item_label}"
+                                player_name.jacket.inventory[i][0] = f"{
+                                    i + 1}. {item_label}"
                                 type_write("Item successfully picked up!\n")
                             elif item_label == "Pocket":
-                                # Pocket adds an extra inventory slot to the jacket
+                                # Pocket adds an extra inventory slot to the
+                                # jacket
                                 type_write("Pocket added to jacket.\n")
                                 player_name.jacket.inventory.append(
-                                    [f"{len(player_name.jacket.inventory) + 1}. EMPTY"]
+                                    [
+                                        f"{len(player_name.jacket.inventory) + 1}. EMPTY"
+                                    ]
                                 )
                             else:
                                 type_write("There's nothing to pick up. \n")
-                            loot_stash.inventory[int(item_choice) - 1][0] = f"{item_choice}. EMPTY"
+                            loot_stash.inventory[int(item_choice) - 1][
+                                0
+                            ] = f"{item_choice}. EMPTY"
                             loot_stolen = True
                             break
                     if not loot_stolen:
@@ -479,7 +569,11 @@ def explore_island(player_name: Player):
             food_found = False
             food_items = []
             for idx, item in enumerate(player_name.jacket.inventory):
-                if item[0][-5:] != "EMPTY" and item[0].split(". ")[1] in ["Pork", "Bread", "Apple"]:
+                if item[0][-5:] != "EMPTY" and item[0].split(". ")[1] in [
+                    "Pork",
+                    "Bread",
+                    "Apple",
+                ]:
                     food_items.append((idx, item[0]))
                     food_found = True
 
@@ -497,9 +591,12 @@ def explore_island(player_name: Player):
                     food_type = food_name.split(". ")[1]
                     success, restore_amount = player_name.hunger.eat(food_type)
                     if success:
-                        type_write(f"You eat the {food_type} and restore {restore_amount} hunger points!\n")
+                        type_write(
+                            f"You eat the {food_type} and restore {restore_amount} hunger points!\n"
+                        )
                         # Remove the consumed food from inventory
-                        player_name.jacket.inventory[item_idx][0] = f"{item_idx + 1}. EMPTY"
+                        player_name.jacket.inventory[item_idx][0] = f"{
+                            item_idx + 1}. EMPTY"
                     else:
                         type_write("You cannot eat that!\n")
                 else:
@@ -509,7 +606,10 @@ def explore_island(player_name: Player):
             # Only allow exit from a valid entrance/exit tile
             for i in player_name.map_choice.start_pos:
                 # print(i.split(","))
-                if player_name.pos == [int(i.split(",")[0]), int(i.split(",")[1])]:
+                if player_name.pos == [
+                    int(i.split(",")[0]),
+                    int(i.split(",")[1]),
+                ]:
                     player_name.map_choice = main_map
                     player_name.pos = original_position
                     type_write(
@@ -585,7 +685,11 @@ def main():
             food_found = False
             food_items = []
             for idx, item in enumerate(player_name.jacket.inventory):
-                if item[0][-5:] != "EMPTY" and item[0].split(". ")[1] in ["Pork", "Bread", "Apple"]:
+                if item[0][-5:] != "EMPTY" and item[0].split(". ")[1] in [
+                    "Pork",
+                    "Bread",
+                    "Apple",
+                ]:
                     food_items.append((idx, item[0]))
                     food_found = True
 
@@ -603,9 +707,12 @@ def main():
                     food_type = food_name.split(". ")[1]
                     success, restore_amount = player_name.hunger.eat(food_type)
                     if success:
-                        type_write(f"You eat the {food_type} and restore {restore_amount} hunger points!\n")
+                        type_write(
+                            f"You eat the {food_type} and restore {restore_amount} hunger points!\n"
+                        )
                         # Remove the consumed food from inventory
-                        player_name.jacket.inventory[item_idx][0] = f"{item_idx + 1}. EMPTY"
+                        player_name.jacket.inventory[item_idx][0] = f"{
+                            item_idx + 1}. EMPTY"
                     else:
                         type_write("You cannot eat that!\n")
                 else:
@@ -615,7 +722,9 @@ def main():
             alive = player_name.move()
             if not alive:
                 # Player starved — prompt to quit or restart
-                type_write("You collapse from starvation... Einstein finds you.\n")
+                type_write(
+                    "You collapse from starvation... Einstein finds you.\n"
+                )
                 type_write("GAME OVER: You starved to death!\n")
                 while True:
                     game_choice = type_write(
@@ -624,11 +733,16 @@ def main():
                         userin=True,
                     )
                     if game_choice.lower().startswith("quit"):
-                        log_run(player_name, run_start_time, "Starved to Death")
-                        type_write(f"\nGood bye, {player_name.name.capitalize()}...")
+                        log_run(
+                            player_name, run_start_time, "Starved to Death"
+                        )
+                        type_write(f"\nGood bye, {
+                                player_name.name.capitalize()}...")
                         return
                     elif game_choice.lower().startswith("restart"):
-                        log_run(player_name, run_start_time, "Starved to Death")
+                        log_run(
+                            player_name, run_start_time, "Starved to Death"
+                        )
                         reset_game(player_name)
                         run_start_time = datetime.now()
                         break
@@ -659,7 +773,8 @@ def main():
                     )
                     if game_choice.lower().startswith("quit"):
                         log_run(player_name, run_start_time, "Riddle Failure")
-                        type_write(f"\nGood bye, {player_name.name.capitalize()}...")
+                        type_write(f"\nGood bye, {
+                                player_name.name.capitalize()}...")
                         return
                     elif game_choice.lower().startswith("restart"):
                         log_run(player_name, run_start_time, "Riddle Failure")
@@ -675,19 +790,32 @@ def main():
         else:
             type_write("You cannot do that!")
 
-        # Check if the player is standing on a locked room and prompt to use the key
-        if type(player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]) is Room:
-            key_room = player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]
+        # Check if the player is standing on a locked room and prompt to use
+        # the key
+        if (
+            type(
+                player_name.map_choice.plot[player_name.pos[0]][
+                    player_name.pos[1]
+                ]
+            )
+            is Room
+        ):
+            key_room = player_name.map_choice.plot[player_name.pos[0]][
+                player_name.pos[1]
+            ]
             if key_room.key:
                 type_write(f"You need a {key_room.key_type} to proceed.")
                 ask_key = type_write(
-                    f"Use {key_room.key_type}?\n({BOLD_START}Y{BOLD_END}/{BOLD_START}N{BOLD_END})",
+                    f"Use {
+                        key_room.key_type}?\n({BOLD_START}Y{BOLD_END}/{BOLD_START}N{BOLD_END})",
                     userin=True,
                 )
                 if ask_key.lower().startswith("y"):
                     for item in player_name.jacket.inventory:
                         if item[0][-3:] == key_room.key_type:
-                            type_write("You've unlocked the room! You have gained access to a bigger map!\n")
+                            type_write(
+                                "You've unlocked the room! You have gained access to a bigger map!\n"
+                            )
                             key_room.unlocked = True
                             key_room.key = False
                             item[0] = item[0].split(". ")[0] + ". EMPTY"
