@@ -19,7 +19,8 @@ def type_write(
         text:    The string to display.
         delay:   Seconds between each character (default 0.01).
         newline: If True, print a newline after the text (default True).
-        userin:  If True, prompt for user input after printing and return it (default False).
+        userin:  If True, prompt for user input after printing and return it
+                 (default False).
 
     Returns:
         The user's input string if userin is True, otherwise None.

@@ -229,7 +229,7 @@ def explore_island(player_name: Player):
     original_position = (player_name.pos).copy()
 
     # Prevent entering a locked island slot
-    if type(main_map.plot[player_name.pos[0]][player_name.pos[1]]) == str:
+    if type(main_map.plot[player_name.pos[0]][player_name.pos[1]]) is str:
         type_write("You are not ready for this adventure yet...\n")
         return
 
@@ -250,35 +250,35 @@ def explore_island(player_name: Player):
         current = player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]
         type_write(player_name.hunger.get_status())
 
-        if type(current) == Inventory:
+        if type(current) is Inventory:
             type_write("You are at a loot stash.")
             choices = (
                 f"({BOLD_START}move{BOLD_END}/{BOLD_START}view map{BOLD_END}/"
                 f"{BOLD_START}inspect jacket{BOLD_END}/{BOLD_START}search{BOLD_END}/"
                 f"{BOLD_START}eat{BOLD_END}/{BOLD_START}exit island{BOLD_END})"
             )
-        elif type(current) == Dryad:
+        elif type(current) is Dryad:
             type_write("The Dryad looms before you.")
             choices = (
                 f"({BOLD_START}move{BOLD_END}/{BOLD_START}view map{BOLD_END}/"
                 f"{BOLD_START}inspect jacket{BOLD_END}/{BOLD_START}interact{BOLD_END}/"
                 f"{BOLD_START}search{BOLD_END}/{BOLD_START}eat{BOLD_END}/{BOLD_START}exit island{BOLD_END})"
             )
-        elif type(current) == Kraken:
+        elif type(current) is Kraken:
             type_write("The Kraken stirs in the deep below you.")
             choices = (
                 f"({BOLD_START}move{BOLD_END}/{BOLD_START}view map{BOLD_END}/"
                 f"{BOLD_START}inspect jacket{BOLD_END}/{BOLD_START}interact{BOLD_END}/"
                 f"{BOLD_START}search{BOLD_END}/{BOLD_START}eat{BOLD_END}/{BOLD_START}exit island{BOLD_END})"
             )
-        elif type(current) == DemonsPalace:
+        elif type(current) is DemonsPalace:
             type_write("The Demon's Palace stands before you, its gates scorched black.")
             choices = (
                 f"({BOLD_START}move{BOLD_END}/{BOLD_START}view map{BOLD_END}/"
                 f"{BOLD_START}inspect jacket{BOLD_END}/{BOLD_START}interact{BOLD_END}/"
                 f"{BOLD_START}search{BOLD_END}/{BOLD_START}eat{BOLD_END}/{BOLD_START}exit island{BOLD_END})"
             )
-        elif type(current) == Room:
+        elif type(current) is Room:
             key_room = current
             if key_room.key:
                 type_write(f"You are at a locked room. You need a {key_room.key_type} to proceed.")
@@ -346,7 +346,7 @@ def explore_island(player_name: Player):
 
         elif menu_choice.startswith("use"):
             current = player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]
-            if type(current) == Room and current.key:
+            if type(current) is Room and current.key:
                 # Search inventory for the required key item
                 key_found = False
                 for item in player_name.jacket.inventory:
@@ -366,7 +366,7 @@ def explore_island(player_name: Player):
         elif menu_choice.startswith("interact"):
             current = player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]
 
-            if type(current) == Dryad:
+            if type(current) is Dryad:
                 if not current.riddle_solved:
                     # Dryad requires a Magical Branch as tribute before attempting the riddle
                     has_branch = any("Magical Branch" in item[0] for item in player_name.jacket.inventory)
@@ -393,7 +393,7 @@ def explore_island(player_name: Player):
                 else:
                     type_write("The Dryad nods at you slowly. You have already proven yourself.\n")
 
-            elif type(current) == Kraken:
+            elif type(current) is Kraken:
                 if not current.riddle_solved:
                     if current.attempt_riddle(type_write, BOLD_START, BOLD_END):
                         player_name.level_up()
@@ -405,7 +405,7 @@ def explore_island(player_name: Player):
                 else:
                     type_write("The Kraken's eye slides toward you. It has already deemed you worthy.\n")
 
-            elif type(current) == DemonsPalace:
+            elif type(current) is DemonsPalace:
                 if not current.riddle_solved:
                     # Demon's Palace requires the Eye of Hell as an offering
                     has_eye = any("Eye of Hell" in item[0] for item in player_name.jacket.inventory)
@@ -441,7 +441,7 @@ def explore_island(player_name: Player):
 
         elif menu_choice.startswith("search"):
             current = player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]
-            if type(current) == Inventory:
+            if type(current) is Inventory:
                 loot_stash = current
                 loot_stash.view_inventory()
                 item_choice = type_write(
@@ -676,7 +676,7 @@ def main():
             type_write("You cannot do that!")
 
         # Check if the player is standing on a locked room and prompt to use the key
-        if type(player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]) == Room:
+        if type(player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]) is Room:
             key_room = player_name.map_choice.plot[player_name.pos[0]][player_name.pos[1]]
             if key_room.key:
                 type_write(f"You need a {key_room.key_type} to proceed.")

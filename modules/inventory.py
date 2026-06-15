@@ -7,7 +7,8 @@ class Inventory:
 
     def __init__(self, name: str, inventory: int = 3):
         self.name = name  # Display name of the inventory
-        self.inventory = [[f"{i + 1}. EMPTY"] for i in range(inventory)]  # Initialise slots as EMPTY
+        # Initialise slots as EMPTY
+        self.inventory = [[f"{i + 1}. EMPTY"] for i in range(inventory)]
 
     def __str__(self):
         return self.name

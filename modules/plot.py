@@ -28,4 +28,5 @@ class Island(Plot):
 
     def __init__(self, name: str, plot: str, start_pos: list, description: str):
         super().__init__(name, plot, start_pos)
-        self.description = description  # Flavour text shown when the player enters the island
+        # Flavour text shown when the player enters the island
+        self.description = description

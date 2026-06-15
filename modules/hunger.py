@@ -2,11 +2,14 @@ class Hunger:
     """Manages the player's hunger, tracking points that deplete over time."""
 
     def __init__(self, max_points=30):
-        self.max_points = max_points      # Maximum hunger points the player can have
-        self.current_points = max_points  # Current hunger points, starts at max
+        # Maximum hunger points the player can have
+        self.max_points = max_points
+        # Current hunger points, starts at max
+        self.current_points = max_points
 
     def deplete(self, amount=1):
-        """Reduce hunger by amount, returns True if still alive, False if starved."""
+        """Reduce hunger by amount, returns True if still alive,
+           False if starved."""
         self.current_points -= amount
 
         # Clamp to zero to prevent negative hunger points
@@ -25,7 +28,8 @@ class Hunger:
         }
 
         # Extract food name without item number (e.g. "1. Pork" -> "Pork")
-        food_type = food_name.split(". ")[-1] if ". " in food_name else food_name
+        food_type = food_name.split(". ")[-1] if ". " in food_name \
+            else food_name
 
         if food_type in food_values:
             restore_amount = food_values[food_type]
