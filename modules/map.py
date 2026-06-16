@@ -619,7 +619,7 @@ def explore_island(player_name: Player):
             else:
                 type_write("What would you like to eat?\n")
                 for i, (idx, food) in enumerate(food_items):
-                    type_write(f"{food}")
+                    type_write(f"{i+1}. {food.split()[-1]}")
                 food_choice = type_write("Choose an option: ", userin=True)
 
                 if food_choice in \
