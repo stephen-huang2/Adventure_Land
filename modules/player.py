@@ -15,7 +15,9 @@ from modules.hunger import Hunger
 
 
 class Player:
-    """Represents the player character, tracking position, hunger, and progress."""
+    """
+    Represents the player character, tracking position, hunger, and progress.
+    """
 
     def __init__(
         self,
@@ -52,8 +54,10 @@ class Player:
 
     def move(self):
         """
-        Interactive movement loop. Prompts the player for a direction each step.
-        Depletes hunger on each move. Returns False if the player starves, True otherwise.
+        Interactive movement loop. Prompts the player for a direction each
+        step.
+        Depletes hunger on each move. Returns False if the player starves,
+        True otherwise.
         """
         while True:
             # Display the current tile name if it exists

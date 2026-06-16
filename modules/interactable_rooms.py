@@ -8,6 +8,7 @@
 '''This code is responsible for different interactable room types.'''
 #######################################################################
 
+
 class Room:
     """Represents a room in the game world."""
 
@@ -33,7 +34,8 @@ class Dryad(Room):
     RIDDLE = (
         "I drink the sun to paint the world in emerald, yet I have no mouth.\n"
         "I hold the earth in a silent grip, yet I have no hands.\n"
-        "I have a heart that does not beat, and a crown that I cast aside when the world turns cold.\n"
+        "I have a heart that does not beat, and a crown that I cast aside "
+        "when the world turns cold.\n"
         "What am I?"
     )
     ANSWERS = ["1. A mountain", "2. A tree", "3. A River"]
@@ -46,7 +48,8 @@ class Dryad(Room):
     def attempt_riddle(self, type_write_fn, bold_start, bold_end):
         """Present the Dryad's riddle and evaluate the player's answer."""
         type_write_fn(
-            "\nThe ancient Dryad stirs, her bark-like skin cracking as she turns to face you...\n"
+            "\nThe ancient Dryad stirs, her bark-like skin cracking "
+            "as she turns to face you...\n"
         )
         type_write_fn(f'"{self.RIDDLE}"\n')
 
@@ -55,13 +58,15 @@ class Dryad(Room):
             type_write_fn(ans)
 
         answer = type_write_fn(
-            f"\nChoose your answer ({bold_start}1{bold_end}/{bold_start}2{bold_end}/{bold_start}3{bold_end}):",
+            f"\nChoose your answer ({bold_start}1{bold_end}/"
+            f"{bold_start}2{bold_end}/{bold_start}3{bold_end}):",
             userin=True,
         )
 
         if answer.strip() == self.CORRECT:
             type_write_fn(
-                '\n"Yes... a tree. You understand the living world. I shall grant you passage."\n'
+                '\n"Yes... a tree. You understand the living world. '
+                'I shall grant you passage."\n'
             )
             # Unlock the room and remove the key requirement
             self.riddle_solved = True
@@ -70,7 +75,8 @@ class Dryad(Room):
             return True
         else:
             type_write_fn(
-                '\n"No, that is not correct, and I will not take this disrespect!"\n'
+                '\n"No, that is not correct, and I will not take'
+                'this disrespect!"\n'
             )
             return False
 
@@ -98,7 +104,8 @@ class Kraken(Room):
     def attempt_riddle(self, type_write_fn, bold_start, bold_end):
         """Present the Kraken's riddle and evaluate the player's answer."""
         type_write_fn(
-            "\nThe ocean floor trembles. A colossal eye opens in the darkness below you...\n"
+            "\nThe ocean floor trembles. A colossal eye opens in the "
+            "darkness below you...\n"
         )
         type_write_fn(f'"{self.RIDDLE}"\n')
 
@@ -107,37 +114,47 @@ class Kraken(Room):
             type_write_fn(ans)
 
         answer = type_write_fn(
-            f"\nChoose your answer ({bold_start}1{bold_end}/{bold_start}2{bold_end}/{bold_start}3{bold_end}):",
+            f"\nChoose your answer ({bold_start}1{bold_end}/"
+            f"{bold_start}2{bold_end}/{bold_start}3{bold_end}):",
             userin=True,
         )
 
         if answer.strip() == self.CORRECT:
             type_write_fn(
-                '\n"...Correct. You are not entirely worthless. I shall allow you to pass."\n'
+                '\n"...Correct. You are not entirely worthless. '
+                'I shall allow you to pass."\n'
             )
             self.riddle_solved = True
             self.unlocked = True
             return True
         else:
             type_write_fn(
-                '\n"You are so unintelligent. You do not deserve to speak with me. Leave my sight."\n'
+                '\n"You are so unintelligent. You do not deserve to speak'
+                ' with me. Leave my sight."\n'
             )
             return False
 
 
 class DemonsPalace(Room):
-    """A room inside the Demon's Palace, guarded by a cryptic demonic riddle."""
+    """
+    A room inside the Demon's Palace, guarded by a cryptic demonic riddle.
+    """
 
     RIDDLE = (
-        "I was born in the breath of a whispered wish, yet I have grown into a titan that eclipses the sun.\n"
-        "I am the invisible ink that writes the contracts of this realm, yet I have no hand to hold the pen.\n"
-        "I am the feast that leaves you starving, the drink that leaves you parched,\n"
+        "I was born in the breath of a whispered wish, yet I have grown "
+        "into a titan that eclipses the sun.\n"
+        "I am the invisible ink that writes the contracts of this realm, "
+        "yet I have no hand to hold the pen.\n"
+        "I am the feast that leaves you starving, the drink that leaves "
+        "you parched,\n"
         "and the gold that turns to lead in the light of day.\n"
-        "I am the only burden that becomes heavier the more you try to ignore it,\n"
+        "I am the only burden that becomes heavier the more you try to "
+        "ignore it,\n"
         "and the only debt that is paid in the currency of your own blood.\n"
         "I am the foundation upon which these black spires were raised,\n"
         "and the mirror in which you will finally see your true face.\n"
-        "I am the builder of your cage, and the key that you broke in the lock long before you arrived.\n"
+        "I am the builder of your cage, and the key that you broke in the "
+        "lock long before you arrived.\n"
         "Tell me, mortal: What am I?"
     )
     ANSWERS = [
@@ -161,7 +178,8 @@ class DemonsPalace(Room):
     def attempt_riddle(self, type_write_fn, bold_start, bold_end):
         """Present the demon's riddle and evaluate the player's answer."""
         type_write_fn(
-            "\nThe gates of the Demon's Palace groan open. A voice like grinding stone fills the air...\n"
+            "\nThe gates of the Demon's Palace groan open. A voice like "
+            "grinding stone fills the air...\n"
         )
         type_write_fn(f'"{self.RIDDLE}"\n')
 
@@ -170,9 +188,12 @@ class DemonsPalace(Room):
             type_write_fn(ans)
 
         answer = type_write_fn(
-            f"\nChoose your answer ({bold_start}1{bold_end}/{bold_start}2{bold_end}/{bold_start}3{bold_end}"
-            f"/{bold_start}4{bold_end}/{bold_start}5{bold_end}/{bold_start}6{bold_end}"
-            f"/{bold_start}7{bold_end}/{bold_start}8{bold_end}/{bold_start}9{bold_end}/{bold_start}10{bold_end}):",
+            f"\nChoose your answer ({bold_start}1{bold_end}/"
+            f"{bold_start}2{bold_end}/{bold_start}3{bold_end}"
+            f"/{bold_start}4{bold_end}/{bold_start}5{bold_end}/"
+            f"{bold_start}6{bold_end}"
+            f"/{bold_start}7{bold_end}/{bold_start}8{bold_end}/"
+            f"{bold_start}9{bold_end}/{bold_start}10{bold_end}):",
             userin=True,
         )
 
@@ -181,7 +202,8 @@ class DemonsPalace(Room):
                 '\n"...Sin. You are someone who truly understands us."\n'
             )
             type_write_fn(
-                '"You are the first mortal we have ever let walk back to the real world. Go."\n'
+                '"You are the first mortal we have ever let walk '
+                'back to the real world. Go."\n'
             )
             # Unlock the room and remove the key requirement
             self.riddle_solved = True
@@ -190,7 +212,9 @@ class DemonsPalace(Room):
             return True
         else:
             type_write_fn(
-                "\nThe demons sneer at you. Your answer echoes off the black spires and means nothing.\n"
-                '"Pathetic. Come back when you have truly looked at yourself. Try again next time."\n'
+                "\nThe demons sneer at you. Your answer echoes off the "
+                "black spires and means nothing.\n"
+                '"Pathetic. Come back when you have truly looked at '
+                'yourself. Try again next time."\n'
             )
             return False
