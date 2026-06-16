@@ -17,3 +17,9 @@
 06/08/2026 - Certain rooms are "unlockable" with keys now.
 
 06/09/2026 - Access to forests
+
+06/10/2026 - make hunger
+
+06/11/2026 - make runs
+
+06/12/2026 - Finish runs & pep 8

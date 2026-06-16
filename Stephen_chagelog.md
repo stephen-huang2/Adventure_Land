@@ -22,4 +22,4 @@
 
 6/11/2026 - Pep 8 and orginizing & Alpha testing
 
-6/12/2026 - Beta test
+6/12/2026 - Beta test & polish code
