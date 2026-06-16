@@ -1,3 +1,15 @@
+######################################################################
+# Title: Jeffer Einstein's Archipelago
+# Assignment: Video Game
+# Name: Stephen Huang & Syed Hussain
+# Class: CS30
+# Current Date: 6/15/2026
+#######################################################################
+'''This code is responsible for different interactable room types.'''
+#######################################################################
+
+
+# Hunger class --------------------------------------------------------
 class Hunger:
     """Manages the player's hunger, tracking points that deplete over time."""
 
